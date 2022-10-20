@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": []
+}
