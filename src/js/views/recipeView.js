@@ -2,6 +2,8 @@ import View from './View.js';
 
 import icons from 'url:../../img/icons.svg';
 
+import { myVar } from '../yes';
+
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _errorMessage = 'We could not find that recipe. Please try another one!';
