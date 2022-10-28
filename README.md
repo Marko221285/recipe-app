@@ -12,6 +12,7 @@ This is a course-training project, for study and reminder purposes.
 Project is created with:
 
 - JavaScript
+- TypeScript
 - SASS/SCSS
 - Parcel
 
