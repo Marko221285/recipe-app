@@ -1,5 +1,5 @@
-import View from './View.js';
-import previewView from './previewView.js';
+import View from './View';
+import previewView from './previewView';
 
 class ResultsView extends View {
   _parentElement = document.querySelector('.results');

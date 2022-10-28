@@ -1,7 +1,7 @@
 import { API_URL, RES_PER_PAGE, KEY } from './config';
 import { AJAX } from './helpers';
 
-export const state = {
+export const state: any = {
   recipe: {},
   search: {
     query: '',
@@ -12,7 +12,7 @@ export const state = {
   bookmarks: [],
 };
 
-const createRecipeObject = function (data) {
+const createRecipeObject = function (data: any) {
   const { recipe } = data.data;
   return {
     id: recipe.id,
@@ -28,7 +28,7 @@ const createRecipeObject = function (data) {
   };
 };
 
-export const loadRecipe = async function (id) {
+export const loadRecipe = async function (id: any) {
   try {
     const data = await AJAX(`${API_URL}/${id}?key=${KEY}`);
     state.recipe = createRecipeObject(data);
@@ -42,7 +42,7 @@ export const loadRecipe = async function (id) {
   }
 };
 
-export const loadSearchResults = async function (query) {
+export const loadSearchResults = async function (query: any) {
   try {
     state.search.query = query;
 
@@ -73,7 +73,7 @@ export const getSearchResultsPage = function (page = state.search.page) {
   return state.search.results.slice(start, end);
 };
 
-export const updateServings = function (newServings) {
+export const updateServings = function (newServings: any) {
   state.recipe.ingredients.forEach(ing => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
   });
@@ -81,11 +81,11 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 
-const persistBookmarks = function (recipe) {
+const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
-export const addBookmark = function (recipe) {
+export const addBookmark = function (recipe: any) {
   // add bookmark
   state.bookmarks.push(recipe);
   // mark current recipe as bookmarked
@@ -94,7 +94,7 @@ export const addBookmark = function (recipe) {
   persistBookmarks();
 };
 
-export const deleteBookmark = function (id) {
+export const deleteBookmark = function (id: any) {
   const index = state.bookmarks.findIndex(el => el.id === id);
   state.bookmarks.splice(index, 1);
 
@@ -109,11 +109,11 @@ const init = function () {
 };
 init();
 
-export const uploadRecipe = async function (newRecipe) {
+export const uploadRecipe = async function (newRecipe: any) {
   const ingredients = Object.entries(newRecipe)
     .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
     .map(ing => {
-      const ingArr = ing[1].split(',').map(el => el.trim());
+      const ingArr = (ing[1] as any).split(',').map(el => el.trim());
       if (ingArr.length !== 3)
         throw new Error(
           'Wrong ingredient format! Please use the correct format.'

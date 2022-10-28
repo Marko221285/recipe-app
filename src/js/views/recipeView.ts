@@ -1,30 +1,28 @@
-import View from './View.js';
-
+import View from './View';
+// @ts-ignore
 import icons from 'url:../../img/icons.svg';
-
-import { myVar } from '../yes';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _errorMessage = 'We could not find that recipe. Please try another one!';
   _message = '';
 
-  addHandlerRender(handler) {
+  addHandlerRender(handler: any) {
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
 
-  addHandlerUpdateServings(handler) {
+  addHandlerUpdateServings(handler: any) {
     this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--update-servings');
+      const btn = (e.target as Element).closest('.btn--update-servings');
       if (!btn) return;
-      const updateTo = +btn.dataset.updateTo;
+      const updateTo = +(btn as HTMLElement).dataset.updateTo;
       if (updateTo) handler(updateTo);
     });
   }
 
-  addHandlerAddBookmark(handler) {
+  addHandlerAddBookmark(handler: any) {
     this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--bookmark');
+      const btn = (e.target as Element).closest('.btn--bookmark');
       if (!btn) return;
       handler();
     });

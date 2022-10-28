@@ -1,5 +1,5 @@
-import View from './View.js';
-
+import View from './View';
+// @ts-ignore
 import icons from 'url:../../img/icons.svg';
 
 class PreviewView extends View {

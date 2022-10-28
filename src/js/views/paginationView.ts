@@ -1,16 +1,16 @@
-import View from './View.js';
-
+import View from './View';
+// @ts-ignore
 import icons from 'url:../../img/icons.svg';
 
 class PaginationView extends View {
   _parentElement = document.querySelector('.pagination');
 
-  addHandlerClick(handler) {
+  addHandlerClick(handler: any) {
     this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--inline');
+      const btn = (e.target as Element).closest('.btn--inline');
       if (!btn) return;
 
-      const goToPage = +btn.dataset.goto;
+      const goToPage = +(btn as HTMLElement).dataset.goto;
       handler(goToPage);
     });
   }

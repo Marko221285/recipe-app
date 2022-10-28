@@ -9,7 +9,6 @@ import addRecipeView from './views/addRecipeView';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { MODAL_CLOSE_SEC } from './config';
 
 if (module.hot) {
   module.hot.accept();
@@ -20,6 +19,7 @@ const controlRecipies = async function () {
     const id = window.location.hash.slice(1);
 
     if (!id) return;
+    console.log(id);
     recipeView.renderSpinner();
     // update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
@@ -49,12 +49,12 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlPagination = function (goToPage) {
+const controlPagination = function (goToPage: any) {
   resultsView.render(model.getSearchResultsPage(goToPage));
   paginationView.render(model.state.search);
 };
 
-const controlServings = function (newServ) {
+const controlServings = function (newServ: any) {
   // Update the recipe servings (in state)
   model.updateServings(newServ);
   // Update the recipe view
@@ -72,7 +72,7 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = async function (newRecipe) {
+const controlAddRecipe = async function (newRecipe: any) {
   try {
     // Show loading spinner
     addRecipeView.renderSpinner();

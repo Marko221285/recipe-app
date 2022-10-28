@@ -14,6 +14,7 @@
     "parcel": "^2.7.0"
   },
   "dependencies": {
+    "@types/webpack-env": "^1.18.0",
     "core-js": "^3.25.5",
     "regenerator-runtime": "^0.13.10"
   }

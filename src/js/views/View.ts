@@ -1,9 +1,13 @@
+// @ts-ignore
 import icons from 'url:../../img/icons.svg';
 
 export default class View {
-  _data;
+  _data: any;
+  _parentElement: any;
+  _errorMessage: any;
+  _message: any;
 
-  render(data, render = true) {
+  render(data: any, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
@@ -16,16 +20,18 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  update(data) {
+  update(data: any) {
     this._data = data;
     const newMarkup = this._generateMarkup();
 
-    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newDOM = document
+      .createRange()
+      .createContextualFragment(newMarkup as any);
     const newElements = Array.from(newDOM.querySelectorAll('*'));
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
 
     newElements.forEach((newEl, i) => {
-      const curEl = curElements[i];
+      const curEl: any = curElements[i];
       // updates changed text
       if (
         !newEl.isEqualNode(curEl) &&
@@ -60,14 +66,14 @@ export default class View {
 
   renderError(message = this._errorMessage) {
     const markup = `
-    <div class="error">
-      <div>
-        <svg>
-          <use href="${icons}#icon-alert-triangle"></use>
-        </svg>
+      <div class="error">
+        <div>
+          <svg>
+            <use href="${icons}#icon-alert-triangle"></use>
+          </svg>
+       </div>
+        <p>${message}</p>
       </div>
-      <p>${message}</p>
-    </div>
     `;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
@@ -75,16 +81,20 @@ export default class View {
 
   renderMessage(message = this._message) {
     const markup = `
-    <div class="message">
-      <div>
-        <svg>
-          <use href="${icons}#icon-smile"></use>
-        </svg>
+      <div class="message">
+        <div>
+          <svg>
+            <use href="${icons}#icon-smile"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
       </div>
-      <p>${message}</p>
-    </div>
     `;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  _generateMarkup() {
+    throw new Error('Method not implemented.');
   }
 }
